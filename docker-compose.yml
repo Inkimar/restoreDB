@@ -1,0 +1,15 @@
+fs:
+  image: tianon/true
+  volumes:
+    - ./mysql-autoload:/docker-entrypoint-initdb.d:ro
+    - ./mysql-datadir:/var/lib/mysql:z
+    - ./mysql-shr:/shr:z
+    - ./mysql-conf.d:/etc/mysql/conf.d:z
+
+mariadb:
+  image: mariadb:10.1
+  environment:
+    MYSQL_DATABASE: redmine
+    MYSQL_ROOT_PASSWORD: secr3t
+  volumes_from:
+    - fs
